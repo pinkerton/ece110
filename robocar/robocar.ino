@@ -13,12 +13,12 @@ const int leftFlexSensor = 0;
 const int rightFlexSensor = 1;
 
 // ANALOG OUT pins
-const int leftMotor = 7;
-const int rightMotor = 8;
+const int leftMotor = 5;
+const int rightMotor = 6;
 
 // must be >= 0 && <= 255
-int leftSpeed = 200;
-int rightSpeed = 200;
+int leftSpeed = 255;
+int rightSpeed = 255;
 
 int leftFlexValue;
 int rightFlexValue;
@@ -34,8 +34,8 @@ void setup()
  
 void loop() 
 { 
-  //analogWrite(leftMotor, leftSpeed);
-  //analogWrite(rightMotor, rightSpeed);
+  analogWrite(leftMotor, leftSpeed);
+  analogWrite(rightMotor, rightSpeed);
   
   leftFlexValue = analogRead(leftFlexSensor);
   rightFlexValue = analogRead(rightFlexSensor);
