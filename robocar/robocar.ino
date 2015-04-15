@@ -40,8 +40,11 @@ void loop()
   leftFlexValue = analogRead(leftFlexSensor);
   rightFlexValue = analogRead(rightFlexSensor);
   
-  Serial.print("left flex: " + leftFlexValue);
-  Serial.print("right flex: " + rightFlexValue);
+  Serial.print("left flex: ");
+  Serial.println(leftFlexValue);
+  
+  Serial.print("right flex: ");
+  Serial.println(rightFlexValue);
   
   // wait 2 milliseconds before the next loop
   // for the analog-to-digital converter to settle
