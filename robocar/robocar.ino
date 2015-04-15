@@ -9,8 +9,8 @@ https://learn.sparkfun.com/tutorials/sik-experiment-guide-for-arduino---v32/expe
 */
 
 // ANALOG IN pins
-const int leftFlexSensor = 0;
-const int rightFlexSensor = 1;
+const int leftLightSensor = 0;
+const int rightLightSensor = 1;
 
 // ANALOG OUT pins
 const int leftMotor = 5;
@@ -19,9 +19,6 @@ const int rightMotor = 6;
 // must be >= 0 && <= 255
 int leftSpeed = 255;
 int rightSpeed = 255;
-
-int leftFlexValue;
-int rightFlexValue;
  
 void setup() 
 { 
@@ -37,14 +34,14 @@ void loop()
   analogWrite(leftMotor, leftSpeed);
   analogWrite(rightMotor, rightSpeed);
   
-  leftFlexValue = analogRead(leftFlexSensor);
-  rightFlexValue = analogRead(rightFlexSensor);
+  leftLightValue = analogRead(leftLight);
+  rightLightValue = analogRead(rightLight);
   
-  Serial.print("left flex: ");
-  Serial.println(leftFlexValue);
+  Serial.print("left light sensor: ");
+  Serial.println(leftLightValue);
   
-  Serial.print("right flex: ");
-  Serial.println(rightFlexValue);
+  Serial.print("right light sensor: ");
+  Serial.println(rightLightValue);
   
   // wait 2 milliseconds before the next loop
   // for the analog-to-digital converter to settle
