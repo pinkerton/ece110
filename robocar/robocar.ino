@@ -31,7 +31,7 @@ const int THRESHOLD = 40;
 
 // speaker variables
 int freq = 440;
-int duration = 1000;
+int duration = 2;
 
 void setup()
 {
@@ -60,7 +60,7 @@ void loop()
   } else {
     analogWrite(leftMotor, 0);
     analogWrite(rightMotor, 0);
-    tone(speaker, freq, 2);
+    tone(speaker, freq, duration);
   }
 
   // wait 2 milliseconds before the next loop
