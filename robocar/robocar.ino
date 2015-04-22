@@ -12,12 +12,14 @@ https://learn.adafruit.com/photocells/using-a-photocell
 */
 
 // ANALOG IN pins
-const int leftLightSensor = 2;                                                                                                                                                                                                                               
+const int leftLightSensor = 2;
 //const int rightLightSensor = 1;
+
 
 // ANALOG OUT pins
 const int leftMotor = 5;
 const int rightMotor = 6;
+const int speaker = 8;
 
 // must be >= 0 && <= 255
 int leftSpeed = 55;
@@ -25,7 +27,12 @@ int rightSpeed = 55;
 
 int leftLightValue;
 int rightLightValue;
- 
+
+const int THRESHOLD = 910;
+
+int freq = 440;
+int duration = 1000;
+
 void setup() 
 { 
   pinMode(leftMotor, OUTPUT);
@@ -37,7 +44,8 @@ void setup()
  
 void loop() 
 { 
-  
+  analogWrite(leftMotor, leftSpeed);
+  analogWrite(rightMotor, rightSpeed);
   
   leftLightValue = analogRead(leftLightSensor);
   //rightLightValue = analogRead(rightLightSensor);
@@ -54,17 +62,18 @@ void loop()
   //Serial.print("Analog reading = ");
   //Serial.print(leftLightValue);     // the raw analog reading
   
-  if (leftLightValue > 930) {
-    Serial.println("Let's move.");
+  if (leftLightValue > THRESHOLD) {
     analogWrite(leftMotor, leftSpeed);
     analogWrite(rightMotor, rightSpeed);
   } else {
     analogWrite(leftMotor, 0);
     analogWrite(rightMotor, 0);
+    tone(speaker, freq, 2);
   }
  
   // We'll have a few threshholds, qualitatively determined
   
+  /*
   Serial.print(leftLightValue);
   if (leftLightValue < 10) {
     Serial.println(" - Dark");
@@ -76,7 +85,7 @@ void loop()
     Serial.println(" - Bright");
   } else {
     Serial.println(" - Very bright");
-  }
+  }*/
 
   
   // wait 2 milliseconds before the next loop
