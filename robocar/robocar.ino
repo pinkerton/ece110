@@ -12,16 +12,16 @@ https://learn.adafruit.com/photocells/using-a-photocell
 */
 
 // ANALOG IN pins
-const int leftLightSensor = 0;
-const int rightLightSensor = 1;
+const int leftLightSensor = 2;                                                                                                                                                                                                                               
+//const int rightLightSensor = 1;
 
 // ANALOG OUT pins
 const int leftMotor = 5;
 const int rightMotor = 6;
 
 // must be >= 0 && <= 255
-int leftSpeed = 255;
-int rightSpeed = 255;
+int leftSpeed = 55;
+int rightSpeed = 55;
 
 int leftLightValue;
 int rightLightValue;
@@ -37,11 +37,10 @@ void setup()
  
 void loop() 
 { 
-  analogWrite(leftMotor, leftSpeed);
-  analogWrite(rightMotor, rightSpeed);
   
-  leftLightValue = analogRead(leftLight);
-  rightLightValue = analogRead(rightLight);
+  
+  leftLightValue = analogRead(leftLightSensor);
+  //rightLightValue = analogRead(rightLightSensor);
   
   /*Serial.print("left light sensor: ");
   Serial.println(leftLightValue);
@@ -52,10 +51,21 @@ void loop()
   
   // print how bright the left photo sensor thinks it is
   
-  Serial.print("Analog reading = ");
-  Serial.print(leftLightValue);     // the raw analog reading
+  //Serial.print("Analog reading = ");
+  //Serial.print(leftLightValue);     // the raw analog reading
+  
+  if (leftLightValue > 930) {
+    Serial.println("Let's move.");
+    analogWrite(leftMotor, leftSpeed);
+    analogWrite(rightMotor, rightSpeed);
+  } else {
+    analogWrite(leftMotor, 0);
+    analogWrite(rightMotor, 0);
+  }
  
   // We'll have a few threshholds, qualitatively determined
+  
+  Serial.print(leftLightValue);
   if (leftLightValue < 10) {
     Serial.println(" - Dark");
   } else if (leftLightValue < 200) {
@@ -67,6 +77,7 @@ void loop()
   } else {
     Serial.println(" - Very bright");
   }
+
   
   // wait 2 milliseconds before the next loop
   // for the analog-to-digital converter to settle
