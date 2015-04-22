@@ -19,14 +19,17 @@ const int leftMotor = 5;
 const int rightMotor = 6;
 const int speaker = 8;
 
+// motor variables
 // must be >= 0 && <= 255
 int leftSpeed = 55;
 int rightSpeed = 55;
 
+// light sensor variables
 int lightValue;
+int baseLightValue;
+const int THRESHOLD = 40;
 
-const int THRESHOLD = 910;
-
+// speaker variables
 int freq = 440;
 int duration = 1000;
 
@@ -36,6 +39,8 @@ void setup()
   pinMode(rightMotor, OUTPUT);
   // initialize serial communications at 9600 bps
   Serial.begin(9600);
+
+  baseLightValue = analogRead(lightSensor);
 }
 
 
@@ -49,7 +54,7 @@ void loop()
   //Serial.print("Analog reading = ");
   Serial.print(lightValue);     // the raw analog reading
 
-  if (lightValue > THRESHOLD) {
+  if ((lightValue - baseLightValue) > THRESHOLD) {
     analogWrite(leftMotor, leftSpeed);
     analogWrite(rightMotor, rightSpeed);
   } else {
