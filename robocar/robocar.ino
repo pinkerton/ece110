@@ -46,8 +46,8 @@ void setup()
 
 void loop()
 {
-  analogWrite(leftMotor, leftSpeed);
-  analogWrite(rightMotor, rightSpeed);
+  /*analogWrite(leftMotor, leftSpeed);
+  analogWrite(rightMotor, rightSpeed);*/
 
   lightValue = analogRead(lightSensor);
 
